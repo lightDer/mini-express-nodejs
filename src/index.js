@@ -1,4 +1,7 @@
 import express from 'express'
+import 'express-async-errors'
+
+import todoRoute from './routes/todo.js'
 
 const app = express()
 
@@ -11,6 +14,7 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(myLogger)
 
+app.use(todoRoute)
 app.get('/status', (req, res) => res.send('I am still alive.'))
 app.post('/mirror', (req, res) => res.json(req.body))
 
