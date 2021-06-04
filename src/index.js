@@ -18,7 +18,7 @@ app.use(todoRoute)
 app.get('/status', (req, res) => res.send('I am still alive.'))
 app.post('/mirror', (req, res) => res.json(req.body))
 
-app.get('*', (req, res) => res.status(404).json({ message: '404 Not found.' }))
+app.all('*', (req, res) => res.status(404).json({ message: 'Ooops. 404 Not found.' }))
 
 app.listen(3000, () => {
   console.log('Sever listen on port 3000')
