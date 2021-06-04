@@ -2,6 +2,8 @@ import express from 'express'
 import 'express-async-errors'
 
 import todoRoute from './routes/todo.js'
+import userRoute from './routes/user.js'
+import errorHandler from './middleware/error.js'
 
 const app = express()
 
@@ -15,8 +17,9 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(myLogger)
 
 app.use(todoRoute)
-app.get('/status', (req, res) => res.send('I am still alive.'))
-app.post('/mirror', (req, res) => res.json(req.body))
+app.use(userRoute)
+
+app.use(errorHandler)
 
 app.all('*', (req, res) => res.status(404).json({ message: 'Ooops. 404 Not found.' }))
 
