@@ -7,8 +7,11 @@ function myLogger (req, res, next) {
   next()
 }
 
+// function myMiddleware (req, res, next) {
+//   console.log('IP:', req.ip)
+// }
+
 app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(myLogger)
 
 app.get('/', (req, res) => {
