@@ -10,6 +10,20 @@ function hash (s = '') {
 }
 
 async function login (req, res) {
+  /*
+    #swagger.tags = ['User']
+    #swagger.summary = 'Login'
+    #swagger.parameters['obj'] = {
+      in: 'body',
+      description: 'Login and get token',
+      schema: { $ref: '#/definitions/User' }
+    }
+    #swagger.responses[200] = {
+      schema: { "token": "xxx" },
+      description: "Get order"
+    }
+  */
+
   const { username, password } = req.body
   const { error } = userSchema.validate({ username, password })
   if (error) {
@@ -28,6 +42,11 @@ async function login (req, res) {
 }
 
 function logout (req, res) {
+  /*
+    #swagger.tags = ['User']
+    #swagger.summary = 'Logout'
+  */
+
   const token = req.header('Authorization')
   sessions.delete(token)
 

@@ -1,6 +1,8 @@
 import express from 'express'
 import 'express-async-errors'
 import config from 'config'
+import swaggerUi from 'swagger-ui-express'
+import swaggerFile from './swagger_output.json'
 
 import todoRoute from './routes/todo.js'
 import userRoute from './routes/user.js'
@@ -8,6 +10,9 @@ import logHandler, { logger } from './middleware/logger.js'
 import errorHandler from './middleware/error.js'
 
 const app = express()
+if (process.env.NODE_ENV !== 'production') {
+  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+}
 
 app.use(express.json()) // for parsing application/json
 app.use(logHandler)

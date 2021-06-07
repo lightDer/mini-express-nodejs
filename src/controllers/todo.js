@@ -5,11 +5,34 @@ import {
 } from '../models/todo.joi.js'
 
 async function getTodos (req, res) {
+  /*
+    #swagger.tags = ['Todo']
+    #swagger.summary = 'get todo list'
+    #swagger.responses[200] = {
+      description: "todo id",
+      schema: [ { $ref: '#/definitions/Todo' } ]
+    }
+  */
+
   const ret = await knex('todo').select('*')
   res.json(ret)
 }
 
 async function addTodo (req, res) {
+  /*
+    #swagger.tags = ['Todo']
+    #swagger.summary = 'add todo'
+    #swagger.parameters['obj'] = {
+      in: 'body',
+      description: 'add todo',
+      schema: { $ref: '#/definitions/Todo' }
+    }
+    #swagger.responses[200] = {
+      schema: { "id": 1 },
+      description: "todo id"
+    }
+  */
+
   const { error, value } = todoSchema.validate(req.body)
   if (error) {
     return res.status(400).json(error)
@@ -23,6 +46,18 @@ async function addTodo (req, res) {
 }
 
 async function updateTodo (req, res) {
+  /*
+    #swagger.tags = ['Todo']
+    #swagger.summary = 'update todo'
+    #swagger.parameters['id'] = {
+      in: 'query',
+    }
+    #swagger.parameters['obj'] = {
+      in: 'body',
+      schema: { $ref: '#/definitions/Todo' }
+    }
+  */
+
   const id = req.params.id
   const { error, value } = updateTodoSchema.validate({
     id,
@@ -40,6 +75,14 @@ async function updateTodo (req, res) {
 }
 
 async function deleteTodo (req, res) {
+  /*
+    #swagger.tags = ['Todo']
+    #swagger.summary = 'delete todo'
+    #swagger.parameters['id'] = {
+      in: 'query',
+    }
+  */
+
   const id = req.params.id
   const ret = await knex('todo').where({ id }).del()
 
