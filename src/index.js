@@ -1,5 +1,6 @@
 import express from 'express'
 import 'express-async-errors'
+import config from 'config'
 
 import todoRoute from './routes/todo.js'
 import userRoute from './routes/user.js'
@@ -18,8 +19,10 @@ app.use(errorHandler)
 
 app.all('*', (req, res) => res.status(404).json({ message: 'Ooops. 404 Not found.' }))
 
-app.listen(3000, () => {
-  console.log('Sever listen on port 3000')
+const port = config.get('port')
+app.listen(port, () => {
+  console.log('ENV: ', process.env.NODE_ENV)
+  console.log(`Sever listen on port ${port}`)
 })
 
 process.on('uncaughtException', (error) => {

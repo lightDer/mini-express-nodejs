@@ -1,9 +1,10 @@
 import knex from 'knex'
+import config from 'config'
 
 const myKnex = knex({
   client: 'sqlite3',
   connection: {
-    filename: './db/main.sqlite'
+    filename: config.get('db.filename')
   }
 })
 
