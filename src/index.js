@@ -7,18 +7,17 @@ function myLogger (req, res, next) {
   next()
 }
 
-function myMiddleware (req, res, next) {
-  console.log('IP:', req.ip)
-  next()
-}
+// function myMiddleware (req, res, next) {
+//   console.log('IP:', req.ip)
+//   next()
+// }
 
 app.use(express.json()) // for parsing application/json
-// app.use(myLogger)
+app.use(myLogger)
 
-app.get('/', myLogger, myMiddleware, (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello express.js')
 })
-
 app.get('/status', (req, res) => res.send('I am still alive.'))
 app.post('/mirror', (req, res) => res.json(req.body))
 
