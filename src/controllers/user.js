@@ -3,6 +3,8 @@ import crypto, { randomBytes } from 'crypto'
 import knex from '../startups/db.js'
 import { userSchema } from '../models/user.joi.js'
 
+// { "key": value }
+// { "d93cb52c2e...": 1623330208943 }
 const sessions = new Map()
 
 function hash (s = '') {
