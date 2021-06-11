@@ -32,10 +32,10 @@ app.listen(port, () => {
 
 process.on('uncaughtException', (error) => {
   logger.error(error.message, error)
-  process.exit(1)
+  setTimeout(() => process.exit(1), 1000)
 })
 
 process.on('unhandledRejection', (error) => {
   logger.error(error.message, error)
-  process.exit(1)
+  setTimeout(() => process.exit(1), 1000)
 })
